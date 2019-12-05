@@ -28,6 +28,20 @@ class App extends Component{
     } );
   }
 
+  nameChangeHandler = (event) => 
+  {
+    // console.log('Switch Clicked.');
+    // DO NOT DO THIS !! this.state.persons[0].name = 'Arief Nur Prakosh'
+    this.setState( { //setPersonState : REPLACES all state value, not merge it but REPLACE
+      persons: [
+        { name: "Arief Nur Prax", age: 23 },
+      { name: event.target.value, age: 125 },
+      { name: 'Lin', age: 3 }
+      ]
+
+    } );
+  }
+
 
   render () {
     return (
@@ -42,6 +56,7 @@ class App extends Component{
       name={this.state.persons[1].name} 
       age={this.state.persons[1].age}
       click={this.switchNameHandler.bind(this, 'Axorean Bruh')}
+      change = {this.nameChangeHandler}
       >I'm doing high-five</Person>
       <Person 
       name={this.state.persons[2].name} 
