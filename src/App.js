@@ -11,7 +11,8 @@ class App extends Component{
       { name: 'Mark', age: 25 },
       { name: 'Lin', age: 3 }
     ],
-    otherState : 'Other Values'
+    otherState : 'Other Values',
+    showPersons : false
   };
 
   switchNameHandler = (newName) => 
@@ -43,6 +44,13 @@ class App extends Component{
   }
 
 
+  togglePersonsHandler = () =>
+  { //Arrow method like this, ensure all "this" keyword always under all circumstances returns to this class not the other class  
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
+  }
+
+
   render () {
     const style = {
       backgroundColor : 'white',
@@ -57,20 +65,24 @@ class App extends Component{
       <h2>This is working man!</h2>
       <button
        style = {style}
-       onClick = {() => this.switchNameHandler('Ariefkush R')}>Switch Name</button>
-      <Person 
-      name={this.state.persons[0].name} 
-      age={this.state.persons[0].age}/>        
-      <Person 
-      name={this.state.persons[1].name} 
-      age={this.state.persons[1].age}
-      click={this.switchNameHandler.bind(this, 'Axorean Bruh')}
-      change = {this.nameChangeHandler}
-      >I'm doing high-five</Person>
-      <Person 
-      name={this.state.persons[2].name} 
-      age={this.state.persons[2].age}/>
-
+       onClick = {this.togglePersonsHandler}>Switch Name</button>
+      {
+        this.state.showPersons === true ?   
+        <div >
+          <Person 
+          name={this.state.persons[0].name} 
+          age={this.state.persons[0].age}/>        
+          <Person 
+          name={this.state.persons[1].name} 
+          age={this.state.persons[1].age}
+          click={this.switchNameHandler.bind(this, 'Axorean Bruh')}
+          change = {this.nameChangeHandler}
+          >I'm doing high-five</Person>
+          <Person 
+          name={this.state.persons[2].name} 
+          age={this.state.persons[2].age}/>
+      </div> : null
+      }
     </div>
   )
 }
