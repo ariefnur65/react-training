@@ -91,7 +91,7 @@ class App extends Component{
        onClick = {this.togglePersonsHandler}>Switch Name</button>
        {persons}
     </div>
-  )
+  ) 
 }
   // return React.createElement('div',{className: 'App'},React.createElement('h1', null, 'Ulul ufuf is it working?' ));
 }
