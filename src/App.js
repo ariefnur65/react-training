@@ -8,26 +8,26 @@ class App extends Component{
   //Component Based React
   state = {
     persons : [
-      { name: 'Arief', age: 23 },
-      { name: 'Mark', age: 25 },
-      { name: 'Lin', age: 3 }
+      {id: 'dafreae', name: 'Arief', age: 23 },
+      {id: 'ewewwed', name: 'Mark', age: 25 },
+      {id: 'gfdafd', name: 'Lin', age: 3 }
     ],
     otherState : 'Other Values',
     showPersons : false
   };
 
-  switchNameHandler = (newName) => 
+  deletePersonHandler = (personIndex) => 
   {
-    // console.log('Switch Clicked.');
-    // DO NOT DO THIS !! this.state.persons[0].name = 'Arief Nur Prakosh'
-    this.setState( { //setPersonState : REPLACES all state value, not merge it but REPLACE
-      persons: [
-        { name: newName, age: 23 },
-      { name: 'Markus Hor', age: 125 },
-      { name: 'Lin', age: 3 }
-      ]
+    //Update the state in immutable fashion, 
+    //creating a copy then changed that copy without mutating the original state
 
-    } );
+    //BAD PRACTICE
+    //const persons = this.state.persons;
+    //GOOD PRACTICE 
+    //const persons = this.state.persons.slice();
+    const persons = [...this.state.persons]; //More Modern
+    persons.splice(personIndex  , 1);
+    this.setState({persons: persons});
   }
 
   nameChangeHandler = (event) => 
@@ -66,10 +66,13 @@ class App extends Component{
      if(this.state.showPersons){
         persons = (
           <div>
-            {this.state.persons.map(person => {
+            {this.state.persons.map((person, index) => { //index receive item index in an array 
                return <Person 
+                click = {() => this.deletePersonHandler(index)}
                 name={person.name} 
-               age={person.age} />
+                age={person.age} 
+                key={person.id}
+                />
             })}
         </div> 
         );
