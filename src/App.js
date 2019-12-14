@@ -30,17 +30,22 @@ class App extends Component{
     this.setState({persons: persons});
   }
 
-  nameChangeHandler = (event) => 
+  nameChangeHandler = (event, id) => 
   {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === id;
+    })
+    const person =  {...this.state.persons[personIndex]}; //... spread operator
+    //const person = Object.assign({}, this.state.persons[personIndex]); //old still working
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
     // console.log('Switch Clicked.');
     // DO NOT DO THIS !! this.state.persons[0].name = 'Arief Nur Prakosh'
     this.setState( { //setPersonState : REPLACES all state value, not merge it but REPLACE
-      persons: [
-        { name: "Arief Nur Prax", age: 23 },
-      { name: event.target.value, age: 125 },
-      { name: 'Lin', age: 3 }
-      ]
-
+      persons: persons
     } );
   }
 
@@ -72,6 +77,7 @@ class App extends Component{
                 name={person.name} 
                 age={person.age} 
                 key={person.id}
+                change = {(event) =>this.nameChangeHandler(event, person.id)}
                 />
             })}
         </div> 
