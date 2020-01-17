@@ -1,9 +1,24 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import Radium , { StyleRoot } from 'radium'; //Importing radium allow inline styling to have pseudo slector css such as :hover etc.
+import styled from 'styled-components';
+// import Radium , { StyleRoot } from 'radium'; //Importing radium allow inline styling to have pseudo slector css such as :hover etc.
 //StyleRoot was imported to accomodate radium usage in person component 
 
+
+//IMPORTANT: styled component css use CSS syntax : No Camel Case, no quotation, and selector begins with &
+const StyledButton = styled.button` 
+      background-color : ${props => props.shown ? 'red' : 'green'};
+      color: white;
+      font: inherit;
+      border: 1px solid blue;
+      padding: 8px;
+      cursor: pointer;
+      &:hover {
+        background-color : ${props => props.shown ? 'salmon' : 'greenlight'};
+        color: black;
+      }
+`;
 
 class App extends Component{
   //Component Based React
@@ -67,10 +82,10 @@ class App extends Component{
       border: '1px solid blue',
       padding: '8px',
       cursor: 'pointer',
-      ':hover' : {
-        backgroundColor : 'lightgreen',
-        color: 'white'
-      }
+       ':hover' : {
+         backgroundColor : 'lightgreen',
+         color: 'white'
+       }
     };
 
     let persons = null;
@@ -89,10 +104,10 @@ class App extends Component{
         </div> 
         );
         style.backgroundColor = 'red';
-        style[':hover'] = {
-          backgroundColor : 'salmon',
-          color : 'white'
-        };
+        // style[':hover'] = {
+        //   backgroundColor : 'salmon',
+        //   color : 'white'
+        // };
      }
 
      const cssClasses = [];
@@ -107,17 +122,16 @@ class App extends Component{
 
 
     return (
-      <StyleRoot>
       <div className="App">
         <h1>Hi, I'm a react app yo!</h1>
         {/* Dynamic Css class can be done by cssClasses example, and merging 2 css class with space separator is valid code */}
         <p className={cssClasses.join(" ")}>This is working man!</p> 
-        <button
-        style = {style}
-        onClick = {this.togglePersonsHandler}>Switch Name</button>
+        <StyledButton
+        shown = {this.state.showPersons}
+        // style = {style}
+        onClick = {this.togglePersonsHandler}>Switch Name</StyledButton>
         {persons}
         </div>
-      </StyleRoot>
     
   ) 
 }
@@ -125,7 +139,7 @@ class App extends Component{
 }
 
 
-export default  Radium(App);
+export default  App;
   
   
   
