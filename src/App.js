@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/Person'
+import Person from './Person/Person';
+import Radium , { StyleRoot } from 'radium'; //Importing radium allow inline styling to have pseudo slector css such as :hover etc.
+//StyleRoot was imported to accomodate radium usage in person component 
 
 
 class App extends Component{
@@ -59,11 +61,16 @@ class App extends Component{
   render () {
     //render method always be called each time react needs to render something
     const style = {
-      backgroundColor : 'white',
+      backgroundColor : 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover' : {
+        backgroundColor : 'lightgreen',
+        color: 'white'
+      }
     };
 
     let persons = null;
@@ -81,25 +88,44 @@ class App extends Component{
             })}
         </div> 
         );
-
+        style.backgroundColor = 'red';
+        style[':hover'] = {
+          backgroundColor : 'salmon',
+          color : 'white'
+        };
      }
 
+     const cssClasses = [];
+     if(this.state.persons.length <= 2){
+       cssClasses.push('red');
+     }
+
+     if(this.state.persons.length <=1 )
+     {
+      cssClasses.push('bold');
+     }
+
+
     return (
-    <div className="App">
-      <h1>Hi, I'm a react app yo!</h1>
-      <h2>This is working man!</h2>
-      <button
-       style = {style}
-       onClick = {this.togglePersonsHandler}>Switch Name</button>
-       {persons}
-    </div>
+      <StyleRoot>
+      <div className="App">
+        <h1>Hi, I'm a react app yo!</h1>
+        {/* Dynamic Css class can be done by cssClasses example, and merging 2 css class with space separator is valid code */}
+        <p className={cssClasses.join(" ")}>This is working man!</p> 
+        <button
+        style = {style}
+        onClick = {this.togglePersonsHandler}>Switch Name</button>
+        {persons}
+        </div>
+      </StyleRoot>
+    
   ) 
 }
   // return React.createElement('div',{className: 'App'},React.createElement('h1', null, 'Ulul ufuf is it working?' ));
 }
 
 
-export default App;
+export default  Radium(App);
   
   
   
