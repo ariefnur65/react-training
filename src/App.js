@@ -1,24 +1,24 @@
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 // import Radium , { StyleRoot } from 'radium'; //Importing radium allow inline styling to have pseudo slector css such as :hover etc.
 //StyleRoot was imported to accomodate radium usage in person component 
 
 
 //IMPORTANT: styled component css use CSS syntax : No Camel Case, no quotation, and selector begins with &
-const StyledButton = styled.button` 
-      background-color : ${props => props.shown ? 'red' : 'green'};
-      color: white;
-      font: inherit;
-      border: 1px solid blue;
-      padding: 8px;
-      cursor: pointer;
-      &:hover {
-        background-color : ${props => props.shown ? 'salmon' : 'greenlight'};
-        color: black;
-      }
-`;
+// const StyledButton = styled.button` 
+//       background-color : ${props => props.shown ? 'red' : 'green'};
+//       color: white;
+//       font: inherit;
+//       border: 1px solid blue;
+//       padding: 8px;
+//       cursor: pointer;
+//       &:hover {
+//         background-color : ${props => props.shown ? 'salmon' : 'greenlight'};
+//         color: black;
+//       }
+// `;
 
 class App extends Component{
   //Component Based React
@@ -126,10 +126,11 @@ class App extends Component{
         <h1>Hi, I'm a react app yo!</h1>
         {/* Dynamic Css class can be done by cssClasses example, and merging 2 css class with space separator is valid code */}
         <p className={cssClasses.join(" ")}>This is working man!</p> 
-        <StyledButton
-        shown = {this.state.showPersons}
+        <buttton
+        className = 'button'
+        // shown = {this.state.showPersons}
         // style = {style}
-        onClick = {this.togglePersonsHandler}>Switch Name</StyledButton>
+        onClick = {this.togglePersonsHandler}>Switch Name</buttton>
         {persons}
         </div>
     
