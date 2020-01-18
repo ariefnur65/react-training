@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 // import styled from 'styled-components';
 // import Radium , { StyleRoot } from 'radium'; //Importing radium allow inline styling to have pseudo slector css such as :hover etc.
@@ -89,6 +89,7 @@ class App extends Component{
     };
 
     let persons = null;
+    let btnClass = '';
      if(this.state.showPersons){
         persons = (
           <div>
@@ -103,34 +104,37 @@ class App extends Component{
             })}
         </div> 
         );
-        style.backgroundColor = 'red';
+        // style.backgroundColor = 'red';
         // style[':hover'] = {
         //   backgroundColor : 'salmon',
         //   color : 'white'
         // };
+        
+        btnClass = classes.Red;
+
      }
 
      const cssClasses = [];
      if(this.state.persons.length <= 2){
-       cssClasses.push('red');
+       cssClasses.push(classes.red);
      }
 
      if(this.state.persons.length <=1 )
      {
-      cssClasses.push('bold');
+      cssClasses.push(classes.bold);
      }
 
 
     return (
-      <div className="App">
+      <div className={classes.App}>
         <h1>Hi, I'm a react app yo!</h1>
         {/* Dynamic Css class can be done by cssClasses example, and merging 2 css class with space separator is valid code */}
         <p className={cssClasses.join(" ")}>This is working man!</p> 
-        <buttton
-        className = 'button'
+        <button
+        className = {btnClass}
         // shown = {this.state.showPersons}
         // style = {style}
-        onClick = {this.togglePersonsHandler}>Switch Name</buttton>
+        onClick = {this.togglePersonsHandler}>Switch Name</button>
         {persons}
         </div>
     
