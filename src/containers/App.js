@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import classes from './App.css';
-import Person from './Person/Person';
+// import Person from '../components/Persons/Person/Person';
 // import styled from 'styled-components';
 // import Radium , { StyleRoot } from 'radium'; //Importing radium allow inline styling to have pseudo slector css such as :hover etc.
 //StyleRoot was imported to accomodate radium usage in person component 
-
+// import ErrorBoundery from '../components/ErrorBoundary/ErrorBoundary'
+import Persons from '../components/Persons/Persons'
+import Cockpit from '../components/Cockpit/Cockpit';
 
 //IMPORTANT: styled component css use CSS syntax : No Camel Case, no quotation, and selector begins with &
 // const StyledButton = styled.button` 
@@ -15,7 +17,7 @@ import Person from './Person/Person';
 //       padding: 8px;
 //       cursor: pointer;
 //       &:hover {
-//         background-color : ${props => props.shown ? 'salmon' : 'greenlight'};
+//         background-color : ${props => props.shown ? 'salmon' : 'greenlight'}; 
 //         color: black;
 //       }
 // `;
@@ -75,66 +77,45 @@ class App extends Component{
 
   render () {
     //render method always be called each time react needs to render something
-    const style = {
-      backgroundColor : 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer',
-       ':hover' : {
-         backgroundColor : 'lightgreen',
-         color: 'white'
-       }
-    };
+    // const style = {
+    //   backgroundColor : 'green',
+    //   color: 'white',
+    //   font: 'inherit',
+    //   border: '1px solid blue',
+    //   padding: '8px',
+    //   cursor: 'pointer',
+    //    ':hover' : {
+    //      backgroundColor : 'lightgreen',
+    //      color: 'white'
+    //    }
+    // };
 
     let persons = null;
-    let btnClass = '';
+    // let btnClass = '';
      if(this.state.showPersons){
-        persons = (
-          <div>
-            {this.state.persons.map((person, index) => { //index receive item index in an array 
-               return <Person 
-                click = {() => this.deletePersonHandler(index)}
-                name={person.name} 
-                age={person.age} 
-                key={person.id}
-                change = {(event) =>this.nameChangeHandler(event, person.id)}
-                />
-            })}
-        </div> 
-        );
+        persons = <Persons 
+        ListofPerson = {this.state.persons}
+        clicked = {this.deletePersonHandler}
+        changed = {this.nameChangeHandler} />
         // style.backgroundColor = 'red';
         // style[':hover'] = {
         //   backgroundColor : 'salmon',
         //   color : 'white'
         // };
         
-        btnClass = classes.Red;
+        // btnClass = classes.Red;
 
      }
 
-     const cssClasses = [];
-     if(this.state.persons.length <= 2){
-       cssClasses.push(classes.red);
-     }
-
-     if(this.state.persons.length <=1 )
-     {
-      cssClasses.push(classes.bold);
-     }
-
+     
 
     return (
       <div className={classes.App}>
-        <h1>Hi, I'm a react app yo!</h1>
-        {/* Dynamic Css class can be done by cssClasses example, and merging 2 css class with space separator is valid code */}
-        <p className={cssClasses.join(" ")}>This is working man!</p> 
-        <button
-        className = {btnClass}
-        // shown = {this.state.showPersons}
-        // style = {style}
-        onClick = {this.togglePersonsHandler}>Switch Name</button>
+      <Cockpit 
+          persons = {this.state.persons}
+          clicked = {this.togglePersonsHandler}
+          showPersons = {this.state.showPersons}
+        />
         {persons}
         </div>
     
