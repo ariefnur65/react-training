@@ -20,7 +20,7 @@ const Cockpit = (props) => {
 
     return (
         <div className={classes.Cockpit}>
-            <h1>Hi, I'm a react app yo!</h1>
+            <h1>{props.appTitle}</h1>
             {/* Dynamic Css class can be done by cssClasses example, and merging 2 css class with space separator is valid code */}
             <p className={cssClasses.join(" ")}>This is working man!</p> 
             <button
