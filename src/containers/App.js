@@ -23,17 +23,33 @@ import Cockpit from '../components/Cockpit/Cockpit';
 // `;
 
 class App extends Component{
-  //Component Based React
-  state = {
-    persons : [
-      {id: 'dafreae', name: 'Arief', age: 23 },
-      {id: 'ewewwed', name: 'Mark', age: 25 },
-      {id: 'gfdafd', name: 'Lin', age: 3 }
-    ],
-    otherState : 'Other Values',
-    showPersons : false
-  };
+    //Component Based React
 
+  constructor(props)
+  {
+    super(props);
+    console.log('[App.js] constructor');
+    this.state = {
+      persons : [
+        {id: 'dafreae', name: 'Arief', age: 23 },
+        {id: 'ewewwed', name: 'Mark', age: 25 },
+        {id: 'gfdafd', name: 'Lin', age: 3 }
+      ],
+      otherState : 'Other Values',
+      showPersons : false
+    };
+  } 
+  
+  static getDerivedStateFromProps(props, state)
+  {
+    console.log('[App.js] getDerivedStateFromProps');
+    return state;
+  }
+
+  componentDidMount()
+  {
+    console.log('[App.js] componentDidMount');
+  }
   deletePersonHandler = (personIndex) => 
   {
     //Update the state in immutable fashion, 
@@ -89,6 +105,7 @@ class App extends Component{
     //      color: 'white'
     //    }
     // };
+    console.log('[App.js] render');
 
     let persons = null;
     // let btnClass = '';
