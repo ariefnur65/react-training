@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 // import styled from 'styled-components' //Styled component can be use to add style dynamically in js
 import classes from './Person.css'
 
@@ -15,9 +15,22 @@ import classes from './Person.css'
 //     }
 // `;
 
-const person = (props) => 
+class Person extends Component
 {
-    console.log("[Person.js] rendering...");
+    render()
+    {
+        console.log("[Person.js] rendering...");
+
+        return (
+        
+            <div  className= {classes.Person}/*style={style}*/>
+                <p onClick={this.props.click}>I'm {this.props.name} and I am already {this.props.age}!</p>
+                <p>{this.props.children}</p>    
+                <input type="text" onChange={this.props.change} value={this.props.name}/>
+            </div>  
+        
+        );
+    }
 
     // const style = {
     //     '@media (min-width: 500px)' : {
@@ -28,16 +41,8 @@ const person = (props) =>
     // if (rnd > 0.7){
     //     throw new Error('Sesuatu telah terjadi tuan')
     // }
-    return (
-        
-        <div  className= {classes.Person}/*style={style}*/>
-            <p onClick={props.click}>I'm {props.name} and I am already {props.age}!</p>
-            <p>{props.children}</p>    
-            <input type="text" onChange={props.change} value={props.name}/>
-        </div>  
     
-    );
 
 };
 
-export default person;
+export default Person;
