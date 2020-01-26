@@ -1,7 +1,32 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import classes from './Cockpit.css';
 
 const Cockpit = (props) => {
+
+    useEffect(() => {
+        console.log('[Cockpit.js] UseEffect');
+        //Http Request will be done in this function
+        const timer = setTimeout(() => {
+            alert('Save Send me to The Cloud!');
+        }, 1000);
+        return () => {
+            //this will run when the component is destroyed/ unmount
+            clearTimeout(timer); //this will cancel timer before it trigger something
+            console.log('[Cockpit.js] Clean up in useEffect Method');
+        };
+    },[]); // use effect second argument  eg [props.persons] make useEffect Be Rendered ONLY props.persons is changed
+    //IF you want useEffect run only at the first time it is rendered (componentDidMount Equivalent)  then pass empty array []
+
+
+    useEffect(() => {
+        //will be run every render
+        console.log('[Cockpit.js] UseEffect 2nd');
+        return () => {
+            //will be run every render
+            console.log('[Cockpit.js] Clean up in 2nd UseEffect Method');
+        }
+    });
+    //useEffect(); //use Effect can be use multiple time 
 
     let btnClass = '';
     if(props.showPersons){

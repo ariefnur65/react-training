@@ -8,11 +8,18 @@ class Persons extends Component {
     //     return state;
     // }
 
-    shouldComponentUpdate(nextProps, nextState)
+    shouldComponentUpdate(nextProps, nextState) 
     {
         console.log("[Persons.js] shouldComponentUpdate");
-
-        return true;
+        if(nextProps.ListofPerson !== this.props.ListofPerson) //THIS WORK BECAUSE IT COMPARING 2 REFERENCE ADDRESS VALUE NOT THE ACTUAL VALUE OF THE VARIABLE
+        { // SO YOU MUST  UPDATE THE VAR BY COPYING THE EXISTING VALUE USING SPREAD OPERATOR (...{VALUE}) AND REPLACING THE OLD VALUE WITH THE NEW ONE 
+            //this will make component persons render if ONLY  the PROPS change value
+            return true;
+        }
+        else {
+            return false;
+        }
+        
     }
 
     getSnapshotBeforeUpdate(prevProps, prevState)
@@ -23,9 +30,16 @@ class Persons extends Component {
 
     componentDidUpdate(prevProps, prevstate, snapshot)
     {
-        console.log('[Perons.js] componentDidUpdate');
+        console.log('[Persons.js] componentDidUpdate');
         console.log(snapshot)
     }
+
+    componentWillUnmount()
+    {
+        //use to close connection to server or other clean up works
+        console.log('[Persons.js] componentWillUnmount');
+    }
+
     render()
     {
         console.log('[Persons.js] rendering...');
