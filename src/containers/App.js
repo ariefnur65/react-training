@@ -48,8 +48,23 @@ class App extends Component{
 
   componentDidMount()
   {
+    //can be used to fetch data from server
     console.log('[App.js] componentDidMount');
   }
+
+  shouldComponentUpdate(nextProps, nextState)
+  {
+    //performance improvement
+    console.log('[App.js] shouldComponentUpdate');
+    return true;
+  }
+  componentDidUpdate()
+  {
+    //can be used to fetch data from server
+    console.log('[App.js] componentDidUpdate');
+
+  }
+
   deletePersonHandler = (personIndex) => 
   {
     //Update the state in immutable fashion, 
